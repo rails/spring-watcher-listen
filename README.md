@@ -1,4 +1,7 @@
-# Spring::Watcher::Listen
+# spring-watcher-listen
+
+[![Build Status](https://travis-ci.org/jonleight/spring-watcher-listen.png?branch=master)](https://travis-ci.org/jonleighton/spring-watcher-listen)
+[![Gem Version](https://badge.fury.io/rb/spring-watcher-listen.png)](http://badge.fury.io/rb/spring-watcher-listen)
 
 TODO: Write a gem description
 

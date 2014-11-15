@@ -3,4 +3,4 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in spring-watcher-listen.gemspec
 gemspec
 
-gem "spring", path: "../spring"
+gem "spring", github: "rails/spring", branch: "extract_listen"
