@@ -19,5 +19,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "activesupport"
 
   spec.add_dependency "spring", "~> 1.2"
-  spec.add_dependency "listen", "~> 1.0"
+  spec.add_dependency "listen", "~> 2.7"
 end
