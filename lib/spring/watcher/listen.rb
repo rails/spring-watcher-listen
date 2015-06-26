@@ -4,6 +4,11 @@ require "spring/watcher/abstract"
 require "listen"
 require "listen/version"
 
+# fork() doesn't preserve threads, so a clean
+# Celluloid shutdown isn't possible, but we can
+# reduce the 10 second timeout
+Celluloid.shutdown_timeout = 2
+
 module Spring
   module Watcher
     class Listen < Abstract
@@ -13,9 +18,7 @@ module Spring
 
       def start
         unless @listener
-          @listener = ::Listen.to(*base_directories, relative_paths: false)
-          @listener.latency(latency)
-          @listener.change(&method(:changed))
+          @listener = ::Listen.to(*base_directories, latency: latency, &method(:changed))
           @listener.start
         end
       end
@@ -49,7 +52,7 @@ module Spring
         ([root] +
           files.reject       { |f| f.start_with? "#{root}/" }.map { |f| File.expand_path("#{f}/..") } +
           directories.reject { |d| d.start_with? "#{root}/" }
-        ).uniq
+        ).uniq.map { |path| Pathname.new(path) }
       end
     end
   end
