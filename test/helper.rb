@@ -4,7 +4,9 @@ require "bundler/setup"
 require "spring/test"
 require "minitest/autorun"
 
-require "celluloid/test"
-Celluloid.logger.level = Logger::WARN
+if defined?(Celluloid)
+  require "celluloid/test"
+  Celluloid.logger.level = Logger::WARN
+end
 
 Spring::Test.root = File.expand_path('..', __FILE__)

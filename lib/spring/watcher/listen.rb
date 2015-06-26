@@ -4,10 +4,15 @@ require "spring/watcher/abstract"
 require "listen"
 require "listen/version"
 
-# fork() doesn't preserve threads, so a clean
-# Celluloid shutdown isn't possible, but we can
-# reduce the 10 second timeout
-Celluloid.shutdown_timeout = 2
+if defined?(Celluloid)
+  # fork() doesn't preserve threads, so a clean
+  # Celluloid shutdown isn't possible, but we can
+  # reduce the 10 second timeout
+
+  # There's a patch for Celluloid to avoid this (search for 'fork' in Celluloid
+  # issues)
+  Celluloid.shutdown_timeout = 2
+end
 
 module Spring
   module Watcher
@@ -31,9 +36,10 @@ module Spring
       end
 
       def subjects_changed
-        if @listener && @listener.directories.sort != base_directories.sort
-          restart
-        end
+        return unless @listener
+        return unless @listener.respond_to?(:directories)
+        return unless @listener.directories.sort != base_directories.sort
+        restart
       end
 
       def watching?(file)

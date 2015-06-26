@@ -7,9 +7,9 @@ class ListenWatcherTest < Spring::Test::WatcherTest
     Spring::Watcher::Listen
   end
 
-  setup {
-    Celluloid.boot
-  }
+  setup do
+    Celluloid.boot if defined?(Celluloid)
+  end
 
   teardown { Listen.stop }
 
