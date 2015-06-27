@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "spring-watcher-listen"
-  spec.version       = "1.0.0"
+  spec.version       = "2.0.0"
   spec.authors       = ["Jon Leighton"]
   spec.email         = ["j@jonathanleighton.com"]
   spec.summary       = %q{Makes spring watch files using the listen gem.}
