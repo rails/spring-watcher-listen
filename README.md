@@ -7,6 +7,10 @@ This gem makes [Spring](https://github.com/rails/spring) watch the
 filesystem for changes using [Listen](https://github.com/guard/listen)
 rather than by polling the filesystem.
 
+On larger projects this means spring will be more responsive, more accurate and use less cpu on local filesystems.
+
+(NFS, shared VM folders and user file systems will still need polling)
+
 Listen 2.7 and higher and 3.0 are supported.
 If you rely on Listen 1 you can use v1.0.0 of this gem.
 
