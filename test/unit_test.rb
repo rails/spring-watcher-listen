@@ -53,4 +53,22 @@ class ListenWatcherTest < Spring::Test::WatcherTest
       FileUtils.rmdir other_dir_2
     end
   end
+
+  test "stops listening when already stale" do
+    # Track when we're marked as stale.
+    on_stale_count = 0
+    watcher.on_stale { on_stale_count += 1 }
+
+    # Add a file to watch and start listening.
+    file = "#{@dir}/omg"
+    touch file, Time.now - 2.seconds
+    watcher.add file
+    watcher.start
+    assert watcher.running?
+
+    # Touch bumps mtime and marks as stale which stops listener.
+    touch file, Time.now - 1.second
+    Timeout.timeout(1) { sleep 0.1 while watcher.running? }
+    assert_equal 1, on_stale_count
+  end
 end
