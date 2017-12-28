@@ -22,21 +22,21 @@ module Spring
       attr_reader :listener
 
       def start
-        unless @listener
+        unless defined?(@listener)
           @listener = ::Listen.to(*base_directories, latency: latency, &method(:changed))
           @listener.start
         end
       end
 
       def stop
-        if @listener
+        if defined?(@listener)
           @listener.stop
           @listener = nil
         end
       end
 
       def subjects_changed
-        return unless @listener
+        return unless defined?(@listener)
         return unless @listener.respond_to?(:directories)
         return unless @listener.directories.sort != base_directories.sort
         restart
