@@ -1,5 +1,4 @@
 require "helper"
-require "spring/test/watcher_test"
 require "spring/watcher/listen"
 
 class ListenWatcherTest < Spring::Test::WatcherTest
