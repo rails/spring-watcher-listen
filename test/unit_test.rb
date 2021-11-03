@@ -27,8 +27,8 @@ class ListenWatcherTest < Spring::Test::WatcherTest
       dirs = [dir, other_dir_1, other_dir_2].sort.map { |path| Pathname.new(path) }
       assert_equal dirs, watcher.base_directories.sort
     ensure
-      FileUtils.rmdir other_dir_1
-      FileUtils.rmdir other_dir_2
+      FileUtils.rm_rf other_dir_1
+      FileUtils.rm_rf other_dir_2
     end
   end
 
@@ -49,8 +49,8 @@ class ListenWatcherTest < Spring::Test::WatcherTest
       dirs = [dir, other_dir_1, other_dir_2].sort.map { |path| Pathname.new(path) }
       assert_equal dirs, watcher.base_directories.sort
     ensure
-      FileUtils.rmdir other_dir_1
-      FileUtils.rmdir other_dir_2
+      FileUtils.rm_rf other_dir_1
+      FileUtils.rm_rf other_dir_2
     end
   end
 end
