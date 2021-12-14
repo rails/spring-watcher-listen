@@ -14,6 +14,11 @@ On larger projects this means spring will be more responsive, more accurate and 
 Listen 2.7 and higher and 3.0 are supported.
 If you rely on Listen 1 you can use v1.0.0 of this gem.
 
+## Environment variables
+
+* `DISABLE_SPRING_WATCHER_LISTEN` - If set, this disables the loading of this gem. This can be useful for projects where
+    some configurations do not support inotify (e.g. Docker on M1 Macs).
+
 ## Installation
 
 Stop Spring if it's already running:
