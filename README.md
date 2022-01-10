@@ -1,6 +1,6 @@
 # Listen watcher for Spring
 
-[![Build Status](https://travis-ci.org/jonleighton/spring-watcher-listen.png?branch=master)](https://travis-ci.org/jonleighton/spring-watcher-listen)
+[![Build Status](https://app.travis-ci.com/rails/spring-watcher-listen.svg?branch=master)](https://app.travis-ci.com/github/rails/spring-watcher-listen)
 [![Gem Version](https://badge.fury.io/rb/spring-watcher-listen.png)](http://badge.fury.io/rb/spring-watcher-listen)
 
 This gem makes [Spring](https://github.com/rails/spring) watch the
