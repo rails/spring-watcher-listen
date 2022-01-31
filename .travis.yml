@@ -3,12 +3,11 @@ cache: bundler
 dist: trusty
 sudo: false
 before_script:
-  - travis_retry gem install rails --version '~> 5.1.0'
+  - travis_retry gem install rails --version '~> 6.1.0'
 
 rvm:
-  - 2.2.7
-  - 2.3.4
-  - 2.4.1
+  - 2.7.3
+  - 3.0.3
   - ruby-head
 matrix:
   allow_failures:
