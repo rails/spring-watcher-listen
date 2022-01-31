@@ -1,6 +1,6 @@
 language: ruby
 cache: bundler
-dist: trusty
+dist: bionic
 sudo: false
 before_script:
   - travis_retry gem install rails --version '~> 6.1.0'
