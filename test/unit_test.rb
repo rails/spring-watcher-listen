@@ -6,6 +6,9 @@ class ListenWatcherTest < Spring::Test::WatcherTest
     Spring::Watcher::Listen
   end
 
+  # this test, as currently written, can only run against polling implementations
+  undef :test_add_directory_with_dangling_symlink
+
   setup do
     Celluloid.boot if defined?(Celluloid)
   end

@@ -43,7 +43,7 @@ module Spring
       end
 
       def watching?(file)
-        files.include?(file) || file.start_with?(*directories)
+        files.include?(file) || file.start_with?(*directories.keys)
       end
 
       def changed(modified, added, removed)
@@ -56,8 +56,8 @@ module Spring
 
       def base_directories
         ([root] +
-          files.reject       { |f| f.start_with? "#{root}/" }.map { |f| File.expand_path("#{f}/..") } +
-          directories.reject { |d| d.start_with? "#{root}/" }
+          files.keys.reject       { |f| f.start_with? "#{root}/" }.map { |f| File.expand_path("#{f}/..") } +
+          directories.keys.reject { |d| d.start_with? "#{root}/" }
         ).uniq.map { |path| Pathname.new(path) }
       end
     end
