@@ -22,7 +22,9 @@ module Spring
       attr_reader :listener
 
       def start
-        unless defined?(@listener)
+        return unless defined?(@listener)
+
+        unless @listener
           @listener = ::Listen.to(*base_directories, latency: latency, &method(:changed))
           @listener.start
         end
