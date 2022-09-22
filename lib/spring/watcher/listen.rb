@@ -29,14 +29,14 @@ module Spring
       end
 
       def start
-        return if defined?(@listener) && @listener
+        return if @listener
 
         @listener = ::Listen.to(*base_directories, latency: latency, &method(:changed))
         @listener.start
       end
 
       def stop
-        if defined?(@listener)
+        if @listener
           @listener.stop
           @listener = nil
         end
@@ -47,7 +47,7 @@ module Spring
       end
 
       def subjects_changed
-        return unless defined?(@listener)
+        return unless @listener
         return unless @listener.respond_to?(:directories)
         return unless @listener.directories.sort != base_directories.sort
         restart
