@@ -23,6 +23,11 @@ module Spring
 
       attr_reader :listener
 
+      def initialize(*)
+        super
+        @listener = nil
+      end
+
       def start
         return if defined?(@listener) && @listener
 
@@ -35,6 +40,10 @@ module Spring
           @listener.stop
           @listener = nil
         end
+      end
+
+      def running?
+        @listener && @listener.processing?
       end
 
       def subjects_changed
@@ -54,6 +63,14 @@ module Spring
             mark_stale
           end
         end
+      end
+
+      def mark_stale
+        super
+
+        # May be called from listen thread which won't be happy
+        # about stopping itself, so stop from another thread.
+        Thread.new { stop }.join
       end
 
       def base_directories
