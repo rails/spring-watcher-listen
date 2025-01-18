@@ -4,6 +4,11 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Specify your gem's dependencies in spring-watcher-listen.gemspec
 gemspec
 
+gem "drb"
+gem "logger"
+gem "mutex_m"
+gem "timeout"
+
 if ENV["RAILS_VERSION"] == "edge"
   gem "activesupport", github: "rails/rails", branch: "main"
 elsif ENV["RAILS_VERSION"]

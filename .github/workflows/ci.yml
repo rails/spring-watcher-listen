@@ -6,13 +6,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ruby: [ '2.7', '3.0', '3.1', 'head' ]
-        rails: [ '6.0', '6.1', '7.0', 'edge' ]
-        exclude:
-          - ruby: '3.1'
-            rails: '6.0'
-          - ruby: '3.1'
-            rails: '6.1'
+        ruby: [ '3.2', '3.3', '3.4', 'head' ]
+        rails: [ '7.1', '7.2', '8.0', 'edge' ]
 
     env:
       RAILS_VERSION: ${{ matrix.rails }}

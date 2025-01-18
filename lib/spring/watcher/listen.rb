@@ -31,7 +31,13 @@ module Spring
       def start
         return if @listener
 
-        @listener = ::Listen.to(*base_directories, latency: latency, &method(:changed))
+        options = {
+          latency: latency,
+          ignore:  @ignores,
+          ignore!: @forced_ignores,
+          only:    @onlys
+        }.compact
+        @listener = ::Listen.to(*base_directories, **options, &method(:changed))
         @listener.start
       end
 
@@ -63,6 +69,22 @@ module Spring
             mark_stale
           end
         end
+      end
+
+      def ignore(regexps)
+        regexps = Array(regexps)
+        (@ignores ||= []).concat(regexps)
+        @listener&.ignore(regexps)
+      end
+
+      def ignore!(regexps)
+        @forced_ignores = Array(regexps)
+        @listener&.ignore!(@forced_ignores)
+      end
+
+      def only(regexps)
+        @onlys = regexps || false
+        @listener&.only(@onlys)
       end
 
       def mark_stale

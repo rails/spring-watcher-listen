@@ -73,4 +73,23 @@ class ListenWatcherTest < Spring::Test::WatcherTest
     Timeout.timeout(1) { sleep 0.1 while watcher.running? }
     assert_equal 1, on_stale_count
   end
+
+  test "passes ignore options to listener" do
+    watcher.add @dir
+    watcher.ignore(/\.not_ignored.tmp$/) # .tmp file ignored by default
+    watcher.ignore!(/ignored\.txt$/)     # not be ignored by default, overrides previous
+    watcher.only(/\.tmp$/)                  # also ignore non .tmp files
+    watcher.start
+
+    touch "#{@dir}/ignored.txt"
+    assert_not_stale
+
+    watcher.restart
+
+    touch "#{@dir}/still_ignored.txt"
+    assert_not_stale
+
+    touch "#{@dir}/not_ignored.tmp"
+    assert_stale
+  end
 end

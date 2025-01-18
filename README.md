@@ -32,3 +32,20 @@ Add this line to your application's Gemfile:
 And then execute:
 
     $ bundle
+
+## Ignoring files and directories
+
+Listen ignores some files and directories by default, including `.git`, `log`, `tmp`, and `vendor`
+(see the `Listen::Silencer` [source](https://github.com/guard/listen/blob/master/lib/listen/silencer.rb) for the full list).
+To improve performance and/or prevent unwanted restarts, you can adjust these patterns in your `config/spring.rb`:
+
+```ruby
+Spring.watcher.tap do |watcher|
+  watcher.ignore  [/^node_modules/] # Add more pattern(s) to be ignored
+  watcher.ignore! [/^\.git/]        # Or overwrite all default ignored patterns
+  watcher.only    [/\.rb$/]         # Only listen for specific file patterns (not applied to directories)
+end
+```
+
+These options are passed to Listen and reapplied when the watcher restarts.
+For more information, see the [Listen gem README](https://github.com/guard/listen?tab=readme-ov-file#ignore--ignore).
